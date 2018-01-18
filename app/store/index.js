@@ -4,7 +4,7 @@ import PagesReducer from '../reducers/pages'
 
 const store = createStore(
   combineReducers({
-    page: PagesReducer,
+    page: PagesReducer
   }),
   compose(
     applyMiddleware(thunk),

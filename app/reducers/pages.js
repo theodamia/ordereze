@@ -16,6 +16,10 @@ const page = (
           [action.payload.id]: action.payload
         }
       };
+    case types.FETCH_ALL_PAGES:
+      return {
+        collection: _.keyBy(action.payload, '_id')
+      };
     default:
       return state;
   }
