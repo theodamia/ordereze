@@ -1,4 +1,5 @@
 import ListGroup from 'react-bootstrap/lib/ListGroup.js'
+import Table from 'react-bootstrap'
 import { connect } from 'react-redux'
 import Page from './items/Page.js'
 
@@ -16,12 +17,14 @@ export default class PageList extends React.Component {
           </div>
           <div className="col-lg-12">
             <ListGroup>
-              {this.props.pages.map(page =>(
-                <Page
-                  key={page.id}
-                  page={page}
-                />
-              ))}
+              <div className="row">
+                {this.props.pages.map(page =>(
+                  <Page
+                    key={page.id}
+                    page={page}
+                  />
+                ))}
+              </div>
             </ListGroup>
           </div>
         </div>

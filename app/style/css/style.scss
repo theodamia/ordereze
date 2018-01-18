@@ -17,6 +17,8 @@ ul {
 
 body { background-color: $grey-light; }
 
+section { padding: $small 0 };
+
 .center {
   margin-left: auto;
   margin-right: auto;
@@ -39,6 +41,18 @@ body { background-color: $grey-light; }
   padding-bottom: $small;
 }
 
+.field-input {
+  width: 60%;
+  margin-bottom: $small;
+}
+
+.input__label {
+  font-size: 18px;
+  &--pageType {
+    margin-right: 10px;
+  }
+}
+
 /*------------------------------------*\
   #Header
 \*------------------------------------*/
@@ -50,23 +64,14 @@ header {
   #Page Form
 \*------------------------------------*/
 .form {
-  padding: $small 0;
-  border: 2px solid $blue;
-  border-radius: 5px;
-
-  .form__label {
-    font-size: 18px;
-    &--pageType {
-      margin-right: 10px;
-    }
-  }
-
   .form__input {
-      width: 400px;
-      margin-bottom: $small;
+    @extend  .field-input;
     &--active {
       bottom: 4px;
       left: 15px;
+    }
+    &--datepicker {
+      width: 170%;
     }
   }
 }
@@ -74,3 +79,20 @@ header {
 /*------------------------------------*\
   #Pages List
 \*------------------------------------*/
+.list-item__horizontal {
+  display: inline-block;
+  padding: $small;
+  width: 100%;
+
+  .list-item__component {
+    @extend .field-input;
+    width: 100%;
+  }
+
+  .list-item__input {
+    &--active {
+      bottom: 10px;
+      left: 15px;
+    }
+  }
+}

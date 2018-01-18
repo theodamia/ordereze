@@ -1,9 +1,8 @@
 import { FormGroup, FormControl, ControlLabel,
   MenuItem, DropdownButton, Checkbox } from 'react-bootstrap'
 import Button from '../button/Button'
-import moment from 'moment'
+// import moment from 'moment'
 import DatePicker from 'react-datepicker';
-// import 'react-datepicker/dist/react-datepicker.css';
 
 export default class PageForm extends React.Component {
   constructor(props) {
@@ -13,8 +12,9 @@ export default class PageForm extends React.Component {
       title: '',
       description: '',
       publishedOn: null,
-      active: '',
-      type: ''
+      active: false,
+      type: '',
+      typeText: 'Types'
     };
 
     this.handleTitleChange       = this.handleTitleChange.bind(this);
@@ -37,9 +37,18 @@ export default class PageForm extends React.Component {
     this.setState({ active: e.target.checked });
     console.log(e.target.checked);
   }
-  handlePageTypeChange(pageTypeID) {
-    this.setState({ type: pageTypeID});
-    console.log(pageTypeID);
+  handlePageTypeChange(pageTypeID, typeText) {
+    this.setState({
+      type: pageTypeID
+    });
+
+    if(pageTypeID == 0) {
+      this.setState({ typeText: 'Responsive page that shows the Menu'});
+    } else if (pageTypeID == 1) {
+      this.setState({ typeText: 'Responsive page for the Events' });
+    } else if (pageTypeID == 2) {
+      this.setState({ typeText: 'Responsive page for general content' });
+    }
   }
   handleSubmit(e) {
     e.preventDefault();
@@ -48,6 +57,7 @@ export default class PageForm extends React.Component {
     var publishedOn = this.state.publishedOn;
     var active      = this.state.active;
     var type        = this.state.type;
+    var typeText  = this.state.typeText;
 
     if(!title) {
       return;
@@ -64,9 +74,10 @@ export default class PageForm extends React.Component {
     this.setState({
       title: '',
       description: '',
-      publishedOn: '',
-      active: '',
-      type: ''
+      publishedOn: null,
+      active: false,
+      type: '',
+      typeText:'Types'
     });
   }
   render() {
@@ -75,7 +86,8 @@ export default class PageForm extends React.Component {
       {id: "1", type: "Responsive page for the Events"},
       {id: "2", type: "Responsive page for general content"}];
     return (
-      <section className="form row">
+      <section className="form">
+        <div className="row">
           <form onSubmit={this.handleSubmit}>
             <div className="col-lg-12">
               <h2 className="subtitle">Page Creation Form:</h2>
@@ -94,10 +106,11 @@ export default class PageForm extends React.Component {
                     <DatePicker
                       className="form-control form__input form__input--datepicker"
                       placeholderText="Click to select date of publish"
-                      showTimeSelect
                       selected={this.state.publishedOn}
                       onChange={this.handlePublishedOnChange}
                       dateFormat="YYYY/MM/DD"
+                      showTimeSelect
+                      timeFormat="HH:mm"
                     />
                     <FormControl
                       className="form__input "
@@ -106,16 +119,16 @@ export default class PageForm extends React.Component {
                       value={this.state.description}
                       onChange={this.handleDescriptionChange}
                     />
-                    <label className="form__label">Active:</label>
+                    <label className="input__label">Active:</label>
                     <Checkbox
                       inline
                       className="form__input form__input--active"
-                      value={this.state.active}
+                      checked={this.state.active}
                       onClick={this.handleActiveChange}
                     />
                     <div>
-                      <label className="form__label form__label--pageType">Page type:</label>
-                      <DropdownButton title="Types" bsStyle="default" id="dropdown-basic">
+                      <label className="input__label input__label--pageType">Page type:</label>
+                      <DropdownButton title={this.state.typeText} bsStyle="default" id="dropdown-basic">
                         {pageTypes.map(type => (
                           <MenuItem eventKey={type.id} key={type.id} onSelect={this.handlePageTypeChange}>
                             {_.capitalize(type.type)}
@@ -128,7 +141,8 @@ export default class PageForm extends React.Component {
               </FormGroup>
               <Button bsStyle="primary" type="submit" value="Post" text="Add Page" />
             </div>
-        </form>
+          </form>
+        </div>
       </section>
     );
   }
