@@ -1,8 +1,9 @@
 import { FormGroup, FormControl, ControlLabel,
   MenuItem, DropdownButton, Checkbox } from 'react-bootstrap'
 import Button from '../button/Button'
-// import moment from 'moment'
+import moment from 'moment'
 import DatePicker from 'react-datepicker';
+import Datetime from 'react-datetime';
 
 export default class PageForm extends React.Component {
   constructor(props) {
@@ -11,7 +12,7 @@ export default class PageForm extends React.Component {
     this.state = {
       title: '',
       description: '',
-      publishedOn: null,
+      publishedOn: moment(),
       active: false,
       type: '',
       typeText: 'Types'
@@ -35,19 +36,22 @@ export default class PageForm extends React.Component {
   }
   handleActiveChange(e) {
     this.setState({ active: e.target.checked });
-    console.log(e.target.checked);
   }
-  handlePageTypeChange(pageTypeID, typeText) {
-    this.setState({
-      type: pageTypeID
-    });
+  handlePageTypeChange(pageTypeID) {
+    this.setState({ type: pageTypeID });
 
-    if(pageTypeID == 0) {
-      this.setState({ typeText: 'Responsive page that shows the Menu'});
-    } else if (pageTypeID == 1) {
-      this.setState({ typeText: 'Responsive page for the Events' });
-    } else if (pageTypeID == 2) {
-      this.setState({ typeText: 'Responsive page for general content' });
+    switch (pageTypeID) {
+      case '0':
+        return this.setState({ typeText: this.props.pageTypes[0].type});
+        break;
+      case '1':
+        return this.setState({ typeText: this.props.pageTypes[1].type });
+        break;
+      case '2':
+         return this.setState({ typeText: this.props.pageTypes[2].type });
+        break;
+      default:
+        return this.setState({ typeText: 'Types' });
     }
   }
   handleSubmit(e) {
@@ -57,7 +61,7 @@ export default class PageForm extends React.Component {
     var publishedOn = this.state.publishedOn;
     var active      = this.state.active;
     var type        = this.state.type;
-    var typeText  = this.state.typeText;
+    var typeText    = this.state.typeText;
 
     if(!title) {
       return;
@@ -81,10 +85,6 @@ export default class PageForm extends React.Component {
     });
   }
   render() {
-    var pageTypes = [
-      {id: "0", type: "Responsive page that shows the Menu"},
-      {id: "1", type: "Responsive page for the Events"},
-      {id: "2", type: "Responsive page for general content"}];
     return (
       <section className="form">
         <div className="row">
@@ -103,14 +103,12 @@ export default class PageForm extends React.Component {
                       value={this.state.title}
                       onChange={this.handleTitleChange}
                     />
-                    <DatePicker
-                      className="form-control form__input form__input--datepicker"
-                      placeholderText="Click to select date of publish"
-                      selected={this.state.publishedOn}
+                    <Datetime
+                      className="form__input"
+                      inputProps={{ placeholder: 'Click to select date of publish' }}
+                      value={this.state.publishedOn}
                       onChange={this.handlePublishedOnChange}
-                      dateFormat="YYYY/MM/DD"
-                      showTimeSelect
-                      timeFormat="HH:mm"
+                      dateFormat="YYYY-MM-DD"
                     />
                     <FormControl
                       className="form__input "
@@ -129,7 +127,7 @@ export default class PageForm extends React.Component {
                     <div>
                       <label className="input__label input__label--pageType">Page type:</label>
                       <DropdownButton title={this.state.typeText} bsStyle="default" id="dropdown-basic">
-                        {pageTypes.map(type => (
+                        {this.props.pageTypes.map(type => (
                           <MenuItem eventKey={type.id} key={type.id} onSelect={this.handlePageTypeChange}>
                             {_.capitalize(type.type)}
                           </MenuItem>

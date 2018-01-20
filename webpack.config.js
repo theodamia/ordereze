@@ -8,7 +8,7 @@ var mainPath = path.resolve(__dirname, 'app', 'index.js');
 var config = {
   devtool: 'eval',
   entry: [
-    // 'webpack/hot/dev-server',
+    'webpack/hot/dev-server',
     'webpack-dev-server/client?http://localhost:8080',
     mainPath
   ],
@@ -18,24 +18,33 @@ var config = {
     publicPath: '/build/'
   },
   module: {
-    rules: [{
-      test: [/\.js$|\.jsx$/],
-      loader: 'babel-loader',
-      exclude: [nodeModulesPath]
-    },
-    {
-      test: /\.(css|pcss|scss)$/,
-      exclude: /node_modules/,
-      use: [
-        {
-          loader: 'style-loader' // creates style nodes from JS strings
-        }, {
-          loader: 'css-loader'   //translates CSS into CommonJS
-        }, {
-          loader: "sass-loader"  // compiles Sass to CSS
-        }
-      ]
-    }]
+    rules: [
+      {
+        test: [/\.js$|\.jsx$/],
+        loader: 'babel-loader',
+        exclude: [nodeModulesPath]
+      },
+      {
+        test: /\.(css|pcss|scss)$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'style-loader' // creates style nodes from JS strings
+          }, {
+            loader: 'css-loader'   //translates CSS into CommonJS
+          }, {
+            loader: 'sass-loader'  // compiles Sass to CSS
+          }
+        ]
+      }, {
+        test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)(\?.*$|$)/,
+        use: [
+          {
+            loader: 'file-loader' // Instructs webpack to emit the required object as file and to return its public URL
+          }
+        ]
+      }
+    ]
   },
   plugins: [
     new Webpack.HotModuleReplacementPlugin(),

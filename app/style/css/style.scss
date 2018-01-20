@@ -1,8 +1,10 @@
 /*------------------------------------*\
   #Imports
 \*------------------------------------*/
-@import "~react-datepicker/dist/react-datepicker.css";
 @import "./variables.scss";
+@import '~font-awesome/scss/font-awesome.scss';
+// @import "~react-datepicker/dist/react-datepicker.css";
+@import "./react-datetime.css";
 
 /*------------------------------------*\
   #General
@@ -56,9 +58,7 @@ section { padding: $small 0 };
 /*------------------------------------*\
   #Header
 \*------------------------------------*/
-header {
-  padding: $small 0;
-}
+header { padding: $small 0; }
 
 /*------------------------------------*\
   #Page Form
@@ -83,10 +83,17 @@ header {
   display: inline-block;
   padding: $small;
   width: 100%;
+  margin-bottom: 15px !important;
 
   .list-item__component {
     @extend .field-input;
     width: 100%;
+    &--icons i {
+      cursor: pointer;
+      border: 1px solid black;
+      border-radius: 5px;
+      padding: 4px 0;
+    }
   }
 
   .list-item__input {

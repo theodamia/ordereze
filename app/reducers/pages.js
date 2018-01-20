@@ -18,7 +18,11 @@ const page = (
       };
     case types.FETCH_ALL_PAGES:
       return {
-        collection: _.keyBy(action.payload, '_id')
+        collection: _.keyBy(action.payload, 'id')
+      };
+    case types.DELETE_PAGE:
+      return {
+        collection: _.omit(state.collection, action.payload.id)
       };
     default:
       return state;

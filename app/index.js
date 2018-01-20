@@ -8,7 +8,11 @@ import Main from './pages/Main'
 ReactDOM.render((
   <Provider store={store}>
     <Router>
-      <Route past="/" component={App} />
+      <App>
+        <Switch>
+          <Route past="/" component={Main} />
+        </Switch>
+      </App>
     </Router>
   </Provider>
 ), document.getElementById('content'))
