@@ -1,9 +1,10 @@
 import ListGroup from 'react-bootstrap/lib/ListGroup';
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import Page from './items/Page';
 
-export default class PageList extends React.Component {
+export default class List extends React.Component {
   constructor(props) {
     super(props);
 
@@ -71,10 +72,10 @@ export default class PageList extends React.Component {
         });
         break;
       default:
-        console.log('mpla');
     }
   }
   render() {
+    console.log(this.props.pages);
     return (
       <section className="list">
         <div className="row">
@@ -102,13 +103,13 @@ export default class PageList extends React.Component {
   }
 }
 
-PageList.propTypes = {
+List.propTypes = {
+  pages: PropTypes.array,
+  pageTypes: PropTypes.array,
   onTitleUpdate: PropTypes.func,
   onDescriptionUpdate: PropTypes.func,
   onPublishedOn: PropTypes.func,
   onActiveUpdate: PropTypes.func,
   onPageTypeUpdate: PropTypes.func,
   handlePageDelete: PropTypes.func,
-  pages: PropTypes.array,
-  pageTypes: PropTypes.array,
 };

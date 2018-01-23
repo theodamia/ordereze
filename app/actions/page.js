@@ -31,8 +31,8 @@ export function updatePage(page) {
   return (dispatch) => {
     axios.put(`http://pagesmanagement.azurewebsites.net/api/ResponsivePages/${page.id}`, _.omit(page))
       .then((response) => {
-        dispatch(storePageRequest(response));
-        console.log(response);
+        dispatch(storePageRequest(response.data));
+        console.log(response.data);
       })
       .catch((error) => {
         console.log(error);

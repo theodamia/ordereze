@@ -3,10 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { storePage, fetchAllPages, deletePage, updatePage } from '../actions/page';
 
-import PageForm from '../components/form/PageForm';
-// import List from '../components/list/List';
+import List from '../components/list/List';
 
-class Main extends React.Component {
+class PageList extends React.Component {
   constructor(props) {
     super(props);
     this.handlePageSubmit = this.handlePageSubmit.bind(this);
@@ -32,9 +31,15 @@ class Main extends React.Component {
       { id: '2', type: 'Responsive page for general content' }];
     return (
       <section>
-        <PageForm
-          onPageSubmit={this.handlePageSubmit}
+        <List
+          pages={this.props.pages}
           pageTypes={pageTypes}
+          handlePageDelete={this.handlePageDelete}
+          onTitleUpdate={this.handlePageUpdate}
+          onPublishedOn={this.handlePageUpdate}
+          onDescriptionUpdate={this.handlePageUpdate}
+          onActiveUpdate={this.handlePageUpdate}
+          onPageTypeUpdate={this.handlePageUpdate}
         />
       </section>
     );
@@ -52,19 +57,19 @@ const mapDispatchToProps = dispatch => ({
   updatePage: page => dispatch(updatePage(page)),
 });
 
-Main.propTypes = {
+PageList.propTypes = {
   fetchAllPages: PropTypes.func,
   storePage: PropTypes.func,
   deletePage: PropTypes.func,
   updatePage: PropTypes.func,
-  // pages: PropTypes.arrayOf(PropTypes.shape({
-  //   id: PropTypes.number,
-  //   title: PropTypes.string,
-  //   description: PropTypes.string,
-  //   publishedOn: PropTypes.string,
-  //   isActive: PropTypes.boolean,
-  //   type: PropTypes.number,
-  // })),
+  pages: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    title: PropTypes.string,
+    description: PropTypes.string,
+    publishedOn: PropTypes.string,
+    isActive: PropTypes.boolean,
+    type: PropTypes.number,
+  })),
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Main);
+export default connect(mapStateToProps, mapDispatchToProps)(PageList);

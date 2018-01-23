@@ -5,12 +5,10 @@ const nodeModulesPath = path.resolve(__dirname, 'node_modules');
 const buildPath = path.resolve(__dirname, 'public', 'build');
 const mainPath = path.resolve(__dirname, 'app', 'index.jsx');
 
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-
 const config = {
   devtool: 'eval',
   entry: [
-    // 'webpack/hot/dev-server',
+    'webpack/hot/dev-server',
     'webpack-dev-server/client?http://localhost:8080',
     mainPath,
   ],
@@ -36,11 +34,6 @@ const config = {
       },
       {
         test: /\.(css|pcss|scss)$/,
-        // use: ExtractTextPlugin.extract({
-        //   fallback: 'style-loader',
-        //   use: ['css-loader', 'sass-loader'],
-        //   exclude: /node_modules/
-        // })
         exclude: /node_modules/,
         use: [
           {
@@ -64,9 +57,11 @@ const config = {
   devServer: {
     open: true,
     openPage: 'public/',
+    historyApiFallback: {
+      index: 'public/index.html',
+    },
   },
   plugins: [
-    new ExtractTextPlugin('styles.css'),
     new Webpack.HotModuleReplacementPlugin(),
     new Webpack.NamedModulesPlugin(),
     new Webpack.ProvidePlugin({

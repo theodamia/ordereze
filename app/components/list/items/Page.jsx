@@ -7,7 +7,7 @@ import Datetime from 'react-datetime';
 const Page = ({
   page, pageTypes, handlePageDelete, onPageUpdate,
 }) => (
-  <div className="col-lg-4">
+  <div className="col-lg-12">
     <ListGroupItem className="list-item__horizontal">
       <div className="list-item__component">
         <input
