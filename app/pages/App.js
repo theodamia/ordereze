@@ -1,32 +1,18 @@
-import { FormGroup, FormControl, ControlLabel } from 'react-bootstrap'
-import { connect } from 'react-redux'
-import { storePage } from '../actions/page'
+import '../style/css/style.scss'
 
-import PageForm from '../components/form/PageForm.js'
-
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = { data: [] };
-
-    this.handlePageSubmit = this.handlePageSubmit.bind(this);
-  }
-  handlePageSubmit(page) {
-    this.props.storePage(page);
-  }
+export default class App extends React.Component {
   render() {
     return (
       <div className="container">
         <header className="row">
           <div className="col-lg-12">
-            <h1>Responsive Pages</h1>
+            <h1 className="title">Responsive Pages</h1>
           </div>
         </header>
         <main className="row">
           <div className="col-lg-12">
-            {/* {this.props.children} */}
-            <PageForm onPageSubmit={this.handlePageSubmit} />
+            {/* {React.cloneElement(this.props.children, { ...this.pageTypes })} */}
+            {this.props.children}
           </div>
         </main>
         <footer className="row">
@@ -36,13 +22,3 @@ class App extends React.Component {
     );
   }
 }
-
-const mapStateToProps = (state, props) => ({
-  pages: _.map(state.page.collection, item => item)
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  storePage: (page) => dispatch(storePage(page))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
