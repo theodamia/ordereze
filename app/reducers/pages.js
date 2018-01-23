@@ -1,28 +1,27 @@
-import * as types from '../constants/index.js'
+import * as types from '../constants/index';
 
 const initialState = {
-  collection: {}
+  collection: {},
 };
 
-const page = (
-  state = initialState,
-  action
-) => {
+const page = (state = initialState,
+  action) => {
   switch (action.type) {
     case types.STORE_PAGE:
+      console.log(action.payload);
       return {
         collection: {
           ...state.collection,
-          [action.payload.id]: action.payload
-        }
+          [action.payload.id]: action.payload,
+        },
       };
     case types.FETCH_ALL_PAGES:
       return {
-        collection: _.keyBy(action.payload, 'id')
+        collection: _.keyBy(action.payload, 'id'),
       };
     case types.DELETE_PAGE:
       return {
-        collection: _.omit(state.collection, action.payload.id)
+        collection: _.omit(state.collection, action.payload.id),
       };
     default:
       return state;

@@ -1,8 +1,7 @@
-import ListGroup from 'react-bootstrap/lib/ListGroup.js'
-import { connect } from 'react-redux'
-import moment from 'moment'
-
-import Page from './items/Page.js'
+import ListGroup from 'react-bootstrap/lib/ListGroup';
+import React from 'react';
+import PropTypes from 'prop-types';
+import Page from './items/Page';
 
 export default class PageList extends React.Component {
   constructor(props) {
@@ -12,50 +11,54 @@ export default class PageList extends React.Component {
   }
   onPageUpdate(e, page, type, pageTypeID) {
     switch (type) {
-      case 'title':
-        var title = e.target.value.trim();
+      case 'title': {
+        const title = e.target.value.trim();
         this.props.onTitleUpdate({
           id: page.id,
-          title: title,
+          title,
           description: page.description,
           publishedOn: page.publishedOn,
           isActive: page.isActive,
-          type: page.type
+          type: page.type,
         });
         break;
-      case 'description':
-        var description = e.target.value.trim();
+      }
+      case 'description': {
+        const description = e.target.value.trim();
         this.props.onDescriptionUpdate({
           id: page.id,
           title: page.title,
-          description: description,
+          description,
           publishedOn: page.publishedOn,
           isActive: page.isActive,
-          type: page.type
+          type: page.type,
         });
         break;
-      case 'publishedOn':
-        var publishedOn = e;
+      }
+      case 'publishedOn': {
+        const publishedOn = e;
         this.props.onPublishedOn({
           id: page.id,
           title: page.title,
           description: page.description,
-          publishedOn: publishedOn,
+          publishedOn,
           isActive: page.isActive,
-          type: page.type
+          type: page.type,
         });
         break;
-      case 'isActive':
-        var isActive = e.target.checked;
+      }
+      case 'isActive': {
+        const isActive = e.target.checked;
         this.props.onActiveUpdate({
           id: page.id,
           title: page.title,
           description: page.description,
           publishedOn: page.publishedOn,
-          isActive: isActive,
-          type: page.type
+          isActive,
+          type: page.type,
         });
         break;
+      }
       case 'pageType':
         console.log(pageTypeID);
         this.props.onPageTypeUpdate({
@@ -64,13 +67,15 @@ export default class PageList extends React.Component {
           description: page.description,
           publishedOn: page.publishedOn,
           isActive: page.isActive,
-          type: pageTypeID
+          type: pageTypeID,
         });
         break;
+      default:
+        console.log('mpla');
     }
   }
   render() {
-    return(
+    return (
       <section className="list">
         <div className="row">
           <div className="col-lg-12">
@@ -79,7 +84,7 @@ export default class PageList extends React.Component {
           <div className="col-lg-12">
             <ListGroup>
               <div className="row">
-                {this.props.pages.map(page =>(
+                {this.props.pages.map(page => (
                   <Page
                     key={page.id}
                     page={page}
@@ -96,3 +101,14 @@ export default class PageList extends React.Component {
     );
   }
 }
+
+PageList.propTypes = {
+  onTitleUpdate: PropTypes.func,
+  onDescriptionUpdate: PropTypes.func,
+  onPublishedOn: PropTypes.func,
+  onActiveUpdate: PropTypes.func,
+  onPageTypeUpdate: PropTypes.func,
+  handlePageDelete: PropTypes.func,
+  pages: PropTypes.array,
+  pageTypes: PropTypes.array,
+};

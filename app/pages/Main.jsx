@@ -1,18 +1,20 @@
-import { storePage, fetchAllPages, deletePage, updatePage } from '../actions/page'
-import { connect } from 'react-redux'
+import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { storePage, fetchAllPages, deletePage, updatePage } from '../actions/page';
 
-import PageForm from '../components/form/PageForm.js'
-import PageList from '../components/list/List.js'
+import PageForm from '../components/form/PageForm';
+import PageList from '../components/list/List';
 
 class Main extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = { data: [] };
-
     this.handlePageSubmit = this.handlePageSubmit.bind(this);
     this.handlePageUpdate = this.handlePageUpdate.bind(this);
     this.handlePageDelete = this.handlePageDelete.bind(this);
+  }
+  componentDidMount() {
+    this.props.fetchAllPages();
   }
   handlePageSubmit(page) {
     this.props.storePage(page);
@@ -23,14 +25,11 @@ class Main extends React.Component {
   handlePageUpdate(page) {
     this.props.updatePage(page);
   }
-  componentDidMount() {
-    this.props.fetchAllPages();
-  }
   render() {
-    const pageTypes =  [
-        {id: "0", type: "Responsive page that shows the Menu"},
-        {id: "1", type: "Responsive page for the Events"},
-        {id: "2", type: "Responsive page for general content"}]
+    const pageTypes = [
+      { id: '0', type: 'Responsive page that shows the Menu' },
+      { id: '1', type: 'Responsive page for the Events' },
+      { id: '2', type: 'Responsive page for general content' }];
     return (
       <section>
         <div className="row">
@@ -58,15 +57,29 @@ class Main extends React.Component {
   }
 }
 
-const mapStateToProps = (state, props) => ({
-  pages: _.map(state.page.collection, item => item)
+const mapStateToProps = state => ({
+  pages: _.map(state.page.collection, item => item),
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  storePage: (page) => dispatch(storePage(page)),
+const mapDispatchToProps = dispatch => ({
+  storePage: page => dispatch(storePage(page)),
   fetchAllPages: () => dispatch(fetchAllPages()),
-  deletePage: (pageID) => dispatch(deletePage(pageID)),
-  updatePage: (page) => dispatch(updatePage(page))
+  deletePage: pageID => dispatch(deletePage(pageID)),
+  updatePage: page => dispatch(updatePage(page)),
 });
+
+Main.propTypes = {
+  fetchAllPages: PropTypes.func,
+  storePage: PropTypes.func,
+  deletePage: PropTypes.func,
+  updatePage: PropTypes.func,
+  pages: PropTypes.arrayOf(PropTypes.shape({
+    title: PropTypes.string,
+    description: PropTypes.string,
+    publishedOn: PropTypes.object,
+    isActive: PropTypes.boolean,
+    type: PropTypes.string,
+  })),
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Main);
