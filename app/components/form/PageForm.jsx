@@ -56,8 +56,8 @@ export default class PageForm extends React.Component {
     e.preventDefault();
     const title = this.state.title.trim();
     const description = this.state.description.trim();
-    const { publishedOn } = this.state.publishedOn;
-    const { isActive } = this.state.isActive;
+    const { publishedOn } = this.state;
+    const { isActive } = this.state;
     const { type } = this.state;
     // const { typeText } = this.state;
 

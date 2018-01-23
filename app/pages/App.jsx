@@ -46,7 +46,6 @@ App.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]).isRequired,
-  // children: PropTypes.element.isRequired,
 };
 
 export default App;
