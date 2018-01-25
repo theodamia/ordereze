@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { storePage, fetchAllPages, deletePage, updatePage } from '../actions/page';
-
 import List from '../components/list/List';
 
 class PageList extends React.Component {
@@ -25,15 +24,10 @@ class PageList extends React.Component {
     this.props.updatePage(page);
   }
   render() {
-    const pageTypes = [
-      { id: '0', type: 'Responsive page that shows the Menu' },
-      { id: '1', type: 'Responsive page for the Events' },
-      { id: '2', type: 'Responsive page for general content' }];
     return (
       <section>
         <List
           pages={this.props.pages}
-          pageTypes={pageTypes}
           handlePageDelete={this.handlePageDelete}
           onTitleUpdate={this.handlePageUpdate}
           onPublishedOn={this.handlePageUpdate}
@@ -66,7 +60,7 @@ PageList.propTypes = {
     id: PropTypes.number,
     title: PropTypes.string,
     description: PropTypes.string,
-    publishedOn: PropTypes.string,
+    publishedOn: PropTypes.date,
     isActive: PropTypes.boolean,
     type: PropTypes.number,
   })),

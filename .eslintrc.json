@@ -14,7 +14,7 @@
     "react/require-default-props": 0,
     "react/forbid-prop-types": 0,
     "max-len": ["error", { "code": 180 }],
-    "no-nested-ternary": 0,
+    "no-var": 0,
     "linebreak-style": 0
   },
   "globals": {

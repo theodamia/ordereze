@@ -8,7 +8,6 @@ const page = (state = initialState,
   action) => {
   switch (action.type) {
     case types.STORE_PAGE:
-      console.log(action.payload);
       return {
         collection: {
           ...state.collection,

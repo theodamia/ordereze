@@ -2,13 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { storePage, fetchAllPages, deletePage, updatePage } from '../actions/page';
-
 import PageForm from '../components/form/PageForm';
-// import List from '../components/list/List';
 
 class Main extends React.Component {
   constructor(props) {
     super(props);
+
     this.handlePageSubmit = this.handlePageSubmit.bind(this);
     this.handlePageUpdate = this.handlePageUpdate.bind(this);
     this.handlePageDelete = this.handlePageDelete.bind(this);
@@ -26,17 +25,10 @@ class Main extends React.Component {
     this.props.updatePage(page);
   }
   render() {
-    const pageTypes = [
-      { id: '0', type: 'Responsive page that shows the Menu' },
-      { id: '1', type: 'Responsive page for the Events' },
-      { id: '2', type: 'Responsive page for general content' }];
     return (
-      <section>
-        <PageForm
-          onPageSubmit={this.handlePageSubmit}
-          pageTypes={pageTypes}
-        />
-      </section>
+      <PageForm
+        onPageSubmit={this.handlePageSubmit}
+      />
     );
   }
 }
@@ -57,14 +49,6 @@ Main.propTypes = {
   storePage: PropTypes.func,
   deletePage: PropTypes.func,
   updatePage: PropTypes.func,
-  // pages: PropTypes.arrayOf(PropTypes.shape({
-  //   id: PropTypes.number,
-  //   title: PropTypes.string,
-  //   description: PropTypes.string,
-  //   publishedOn: PropTypes.string,
-  //   isActive: PropTypes.boolean,
-  //   type: PropTypes.number,
-  // })),
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Main);

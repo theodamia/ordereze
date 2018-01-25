@@ -18,9 +18,9 @@ export default class List extends React.Component {
           id: page.id,
           title,
           description: page.description,
-          publishedOn: page.publishedOn,
-          isActive: page.isActive,
           type: page.type,
+          isActive: page.isActive,
+          publishedOn: page.publishedOn,
         });
         break;
       }
@@ -37,7 +37,8 @@ export default class List extends React.Component {
         break;
       }
       case 'publishedOn': {
-        const publishedOn = e;
+        const publishedOn = e._d;
+        console.log(publishedOn);
         this.props.onPublishedOn({
           id: page.id,
           title: page.title,
@@ -60,8 +61,7 @@ export default class List extends React.Component {
         });
         break;
       }
-      case 'pageType':
-        console.log(pageTypeID);
+      case 'pageType': {
         this.props.onPageTypeUpdate({
           id: page.id,
           title: page.title,
@@ -71,11 +71,11 @@ export default class List extends React.Component {
           type: pageTypeID,
         });
         break;
+      }
       default:
     }
   }
   render() {
-    console.log(this.props.pages);
     return (
       <section className="list">
         <div className="row">
@@ -89,7 +89,6 @@ export default class List extends React.Component {
                   <Page
                     key={page.id}
                     page={page}
-                    pageTypes={this.props.pageTypes}
                     handlePageDelete={this.props.handlePageDelete}
                     onPageUpdate={this.onPageUpdate}
                   />
@@ -105,7 +104,6 @@ export default class List extends React.Component {
 
 List.propTypes = {
   pages: PropTypes.array,
-  pageTypes: PropTypes.array,
   onTitleUpdate: PropTypes.func,
   onDescriptionUpdate: PropTypes.func,
   onPublishedOn: PropTypes.func,

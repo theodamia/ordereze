@@ -7,18 +7,6 @@ import App from './pages/App';
 import Main from './pages/Main';
 import PageList from './pages/PageList';
 
-// ReactDOM.render((
-//   <Provider store={store}>
-//     <Router>
-//       <App>
-//         <Switch>
-//           <Route path="/" component={Main} />
-//         </Switch>
-//       </App>
-//     </Router>
-//   </Provider>
-// ), document.getElementById('content'));
-
 ReactDOM.render((
   <Provider store={store}>
     <Router history={browserHistory}>

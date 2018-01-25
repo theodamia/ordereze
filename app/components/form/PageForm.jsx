@@ -5,6 +5,7 @@ import moment from 'moment';
 import PropTypes from 'prop-types';
 import Datetime from 'react-datetime';
 import Button from '../button/button';
+import { PAGE_TYPES } from '../../constants/index';
 
 export default class PageForm extends React.Component {
   constructor(props) {
@@ -42,12 +43,12 @@ export default class PageForm extends React.Component {
     this.setState({ type: pageTypeID });
 
     switch (pageTypeID) {
-      case '0':
-        return this.setState({ typeText: this.props.pageTypes[0].type });
-      case '1':
-        return this.setState({ typeText: this.props.pageTypes[1].type });
-      case '2':
-        return this.setState({ typeText: this.props.pageTypes[2].type });
+      case 0:
+        return this.setState({ typeText: PAGE_TYPES[0].type });
+      case 1:
+        return this.setState({ typeText: PAGE_TYPES[1].type });
+      case 2:
+        return this.setState({ typeText: PAGE_TYPES[2].type });
       default:
         return this.setState({ typeText: 'Types' });
     }
@@ -59,7 +60,6 @@ export default class PageForm extends React.Component {
     const { publishedOn } = this.state;
     const { isActive } = this.state;
     const { type } = this.state;
-    // const { typeText } = this.state;
 
     if (!title) {
       return;
@@ -79,7 +79,7 @@ export default class PageForm extends React.Component {
       publishedOn: null,
       isActive: false,
       type: '',
-      // typeText: 'Types',
+      typeText: 'Types',
     });
   }
   render() {
@@ -89,8 +89,8 @@ export default class PageForm extends React.Component {
           <div className="col-lg-12">
             <h2 className="subtitle">Page Creation Form:</h2>
           </div>
-          <form onSubmit={this.handleSubmit}>
-            <div className="col-lg-12">
+          <div className="col-lg-12">
+            <form onSubmit={this.handleSubmit}>
               <FormGroup>
                 <FormControl
                   type="text"
@@ -105,6 +105,7 @@ export default class PageForm extends React.Component {
                   value={this.state.publishedOn}
                   onChange={this.handlePublishedOnChange}
                   dateFormat="YYYY-MM-DD"
+                  closeOnSelect
                 />
                 <FormControl
                   className="form__input "
@@ -123,9 +124,9 @@ export default class PageForm extends React.Component {
                   />
                 </label>
                 <div>
-                  <label htmlFor="dropdown-basic" className="input__label input__label--pageType">Page type:
+                  <label htmlFor="dropdown-basic" className="input__label">Page type:
                     <DropdownButton title={this.state.typeText} bsStyle="default" id="dropdown-basic">
-                      {this.props.pageTypes.map(type => (
+                      {PAGE_TYPES.map(type => (
                         <MenuItem eventKey={type.id} key={type.id} onSelect={this.handlePageTypeChange}>
                           {_.capitalize(type.type)}
                         </MenuItem>
@@ -137,8 +138,8 @@ export default class PageForm extends React.Component {
               <div className="button-wrapper">
                 <Button type="submit" text="Add Page" />
               </div>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       </section>
     );
@@ -147,5 +148,4 @@ export default class PageForm extends React.Component {
 
 PageForm.propTypes = {
   onPageSubmit: PropTypes.func,
-  pageTypes: PropTypes.array,
 };

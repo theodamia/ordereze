@@ -8,6 +8,7 @@ export function storePageRequest(data) {
 }
 
 export function storePage(page) {
+  console.log(page);
   return (dispatch) => {
     axios.post('http://pagesmanagement.azurewebsites.net/api/ResponsivePages',
       {
@@ -30,9 +31,8 @@ export function updatePage(page) {
   console.log(page);
   return (dispatch) => {
     axios.put(`http://pagesmanagement.azurewebsites.net/api/ResponsivePages/${page.id}`, _.omit(page))
-      .then((response) => {
-        dispatch(storePageRequest(response.data));
-        console.log(response.data);
+      .then(() => {
+        dispatch(storePageRequest(page));
       })
       .catch((error) => {
         console.log(error);
