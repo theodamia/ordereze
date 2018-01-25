@@ -20,7 +20,7 @@ The application is written with:
 - SASS
 - React-Bootstrap
 
-### Other libraries that were used:
-- React-router-date
+Other libraries that were used:
+- React-router-dom
 - Redux-thunk
 - eslint
