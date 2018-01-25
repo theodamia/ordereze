@@ -3,7 +3,7 @@
 ## Too start the application run:
 `npm start`
 
-##Application Info:
+## Application Info:
 The application is writen with:
 - React
 - Redux
