@@ -10,8 +10,8 @@ The application has 2 parts:
 Here we write the necessary data for our form to be saved.
 
 * Second part is a list that previews all the saved pages.
-In this list you can delete a page by simply clinking the delete button,
-also you can update the data of a page by writing in the corresponding input field.
+In this list you can delete a page by clinking the delete button,
+also you can update the data of a page by simply writing in the corresponding input field.
 
 The application is written with:
 - React
