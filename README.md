@@ -4,12 +4,12 @@
 `npm start`
 
 ## Application Info:
-The application has 2 parts.
+The application has 2 parts:
 
-First part is one form for data input of the pages.
+* First part is one form for data input of the pages.
 Here we write the necessary data for our form to be saved.
 
-Second part is a list that previews all the saved pages.
+* Second part is a list that previews all the saved pages.
 In this list you can delete a page by simply clinking the delete button,
 also you can update the data of a page by writing in the corresponding input field.
 
