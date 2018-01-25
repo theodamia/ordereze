@@ -24,3 +24,4 @@ Other libraries that were used:
 - React-router-dom
 - Redux-thunk
 - eslint
+- axios
