@@ -20,7 +20,7 @@ const Page = ({
   }
   return (
     <div className="col-lg-12">
-      <ListGroupItem key={page.id} className="list-item__horizontal">
+      <ListGroupItem key={page.id} className="list-item">
         <div className="list-item__component">
           <input
             className="form-control"

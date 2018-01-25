@@ -103,7 +103,7 @@ header { padding: $small 0; }
 \*------------------------------------*/
 .list h2 { text-align: center; }
 
-.list-item__horizontal {
+.list-item {
   padding: $medium;
   margin: 0 auto 15px auto !important;
   max-width: 680px;
@@ -133,7 +133,7 @@ header { padding: $small 0; }
   }
 }
 
-.list-item__horizontal:hover {
+.list-item:hover {
   transform: translateY(-4px);
   box-shadow: 0 10px 42px rgba(25, 17, 34, 0.1);
   -webkit-transform: translateY(-4px);

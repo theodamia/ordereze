@@ -4,7 +4,6 @@ import NavBar from 'react-bootstrap/lib/Navbar';
 import { Nav, NavItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Link } from 'react-router-dom';
-// import Navigation from '../components/nav/Navigation';
 import '../style/css/style.scss';
 
 const App = ({ children }) => (
@@ -19,7 +18,7 @@ const App = ({ children }) => (
           </NavBar.Header>
           <Nav>
             <LinkContainer to="/PageList" >
-              <NavItem>Pages List</NavItem>
+              <NavItem>Page List</NavItem>
             </LinkContainer>
           </Nav>
         </NavBar>

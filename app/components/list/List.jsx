@@ -76,16 +76,17 @@ export default class List extends React.Component {
     }
   }
   render() {
+    const reverseList = _.reverse(this.props.pages);
     return (
       <section className="list">
         <div className="row">
           <div className="col-lg-12">
-            <h2 className="subtitle">Pages List:</h2>
+            <h2 className="subtitle">Page List:</h2>
           </div>
           <div className="col-lg-12">
             <ListGroup>
               <div className="row">
-                {this.props.pages.map(page => (
+                {reverseList.map(page => (
                   <Page
                     key={page.id}
                     page={page}
