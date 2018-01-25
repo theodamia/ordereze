@@ -1,6 +1,6 @@
 # Ordereze
 
-## Too start the application run:
+## To start the application run:
 `npm start`
 
 ## Application Info:
