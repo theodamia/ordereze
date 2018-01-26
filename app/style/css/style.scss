@@ -3,7 +3,6 @@
 \*------------------------------------*/
 @import "./variables.scss";
 @import '~font-awesome/scss/font-awesome.scss';
-// @import "~react-datepicker/dist/react-datepicker.css";
 @import "./react-datetime.css";
 
 /*------------------------------------*\
@@ -13,13 +12,11 @@ h1, h2, h3, h4, h5, h6 {  margin: 0; }
 
 ul {
   list-style: none;
-  margin:   0;
-  padding:  0;
+  margin: 0;
+  padding: 0;
 }
 
 body { background-color: $grey-light; }
-
-section { padding: $small 0 };
 
 .center {
   margin-left: auto;
@@ -32,28 +29,28 @@ section { padding: $small 0 };
 }
 
 .title {
-  color: $blue;
+  color: $carbon;
   font-weight: 700;
+  text-align: center;
 }
 
 .subtitle {
   font-size: 25px;
   font-weight: 600;
-  color: $black;
+  color: $carbon;
   padding-bottom: $small;
 }
 
 .field-input {
-  width: 60%;
   margin-bottom: $small;
 }
 
 .input__label {
   font-size: 18px;
-  &--pageType {
-    margin-right: 10px;
-  }
+  color: $carbon;
 }
+
+.dropdown { margin-left: $small; }
 
 /*------------------------------------*\
   #Header
@@ -64,14 +61,39 @@ header { padding: $small 0; }
   #Page Form
 \*------------------------------------*/
 .form {
+  @extend .center;
+  max-width: 680px;
+  border: 1px solid $carbon;
+  border-radius: 10px;
+  padding: $small;
+  margin-bottom: $small;
+  -webkit-box-shadow: 0px 0px 10px 1px rgba(169,169,169,1);
+  -moz-box-shadow: 0px 0px 10px 1px rgba(169,169,169,1);
+  box-shadow: 0px 0px 10px 1px rgba(169,169,169,1);
+
+  .button-wrapper {
+    text-align: center;
+  }
+
+  button[type="submit"] {
+    font-weight: 600;
+    color: $white;
+    background-color: $watermellon;
+    border: 1px solid transparent;
+    border-color: $watermellon;
+    border-radius: 4px;
+    padding: 6px 12px;
+  }
+
+  button[type="submit"]:active, :focus {
+    outline-color: $watermellon;
+  }
+
   .form__input {
     @extend  .field-input;
     &--active {
       bottom: 4px;
       left: 15px;
-    }
-    &--datepicker {
-      width: 170%;
     }
   }
 }
@@ -79,11 +101,18 @@ header { padding: $small 0; }
 /*------------------------------------*\
   #Pages List
 \*------------------------------------*/
-.list-item__horizontal {
-  display: inline-block;
-  padding: $small;
-  width: 100%;
-  margin-bottom: 15px !important;
+.list h2 { text-align: center; }
+
+.list-item {
+  padding: $medium;
+  margin: 0 auto 15px auto !important;
+  max-width: 680px;
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 0 3px 10px rgba(25, 17, 34, 0.05);
+  transition: -webkit-transform 250ms cubic-bezier(0.4, 0, 0.2, 1),transform 250ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1), padding 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  -webkit-transition: -webkit-transform 250ms cubic-bezier(0.4, 0, 0.2, 1),transform 250ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1), padding 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  -moz-transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1), padding 250ms cubic-bezier(0.4, 0, 0.2, 1);
 
   .list-item__component {
     @extend .field-input;
@@ -102,4 +131,11 @@ header { padding: $small 0; }
       left: 15px;
     }
   }
+}
+
+.list-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 42px rgba(25, 17, 34, 0.1);
+  -webkit-transform: translateY(-4px);
+  z-index: 1;
 }

@@ -1,50 +1,65 @@
-var Webpack = require('webpack');
-var path = require('path');
+const Webpack = require('webpack');
+const path = require('path');
 
-var nodeModulesPath = path.resolve(__dirname, 'node_modules');
-var buildPath = path.resolve(__dirname, 'public', 'build');
-var mainPath = path.resolve(__dirname, 'app', 'index.js');
+const nodeModulesPath = path.resolve(__dirname, 'node_modules');
+const buildPath = path.resolve(__dirname, 'public', 'build');
+const mainPath = path.resolve(__dirname, 'app', 'index.jsx');
 
-var config = {
+const config = {
   devtool: 'eval',
   entry: [
     'webpack/hot/dev-server',
     'webpack-dev-server/client?http://localhost:8080',
-    mainPath
+    mainPath,
   ],
   output: {
     filename: 'bundle.js',
     path: buildPath,
-    publicPath: '/build/'
+    publicPath: '/build/',
+  },
+  resolve: {
+    extensions: ['.js', '.jsx'],
   },
   module: {
     rules: [
       {
         test: [/\.js$|\.jsx$/],
         loader: 'babel-loader',
-        exclude: [nodeModulesPath]
+        exclude: [nodeModulesPath],
+      },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: ['babel-loader', 'eslint-loader'],
       },
       {
         test: /\.(css|pcss|scss)$/,
         exclude: /node_modules/,
         use: [
           {
-            loader: 'style-loader' // creates style nodes from JS strings
+            loader: 'style-loader', // creates style nodes from JS strings
           }, {
-            loader: 'css-loader'   //translates CSS into CommonJS
+            loader: 'css-loader', // translates CSS into CommonJS
           }, {
-            loader: 'sass-loader'  // compiles Sass to CSS
-          }
-        ]
+            loader: 'sass-loader', // compiles Sass to CSS
+          },
+        ],
       }, {
         test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)(\?.*$|$)/,
         use: [
           {
-            loader: 'file-loader' // Instructs webpack to emit the required object as file and to return its public URL
-          }
-        ]
-      }
-    ]
+            loader: 'file-loader', // Instructs webpack to emit the required object as file and to return its public URL
+          },
+        ],
+      },
+    ],
+  },
+  devServer: {
+    open: true,
+    openPage: 'public/',
+    historyApiFallback: {
+      index: 'public/index.html',
+    },
   },
   plugins: [
     new Webpack.HotModuleReplacementPlugin(),
@@ -53,9 +68,9 @@ var config = {
       React: 'react',
       ReactDOM: 'react-dom',
       axios: 'axios',
-      '_': 'lodash'
-    })
-  ]
+      _: 'lodash',
+    }),
+  ],
 };
 
 module.exports = config;
